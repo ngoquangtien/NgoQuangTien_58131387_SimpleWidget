@@ -14,11 +14,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Context context;
-    EditText editname,editbirth;
+    EditText editname,editbirth,STK;
     Button button;
     RadioButton radmale,radfemale;
     CheckBox chechBox,chechBox2,chechBox3,chechBox4,chechBox5;
-    RadioGroup rdgSex;
+    RadioGroup rdgSex,sothich;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         chechBox5 = findViewById(R.id.checkBox5);
         button = findViewById(R.id.button);
         rdgSex = findViewById(R.id.rdgSex);
+        sothich = findViewById(R.id.sothich);
+        STK = findViewById(R.id.STK);
     }
     private void addevent() {
         button.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public void ok(){
         String name= editname.getText().toString().trim();
         String birth= editbirth.getText().toString().trim();
+        String sothichkhac = STK.getText().toString().trim();
         String result = null;
         if(name.length()>0)
 //            Toast.makeText(context,"Tên : "+name,Toast.LENGTH_SHORT).show();
@@ -64,13 +67,24 @@ public class MainActivity extends AppCompatActivity {
             result += "Ngày sinh : "+birth+"\n";
         switch (rdgSex.getCheckedRadioButtonId()){
             case R.id.radmale:
-                result += "Giới tính : Nam";
+                result += "Giới tính : Nam \n Sở thích : ";
                 break;
             case R.id.radfemale:
-                result += "Giới tính : Nữ ";
+                result += "Giới tính : Nữ \n Sở thích : ";
                 break;
         }
-        
+        if(chechBox.isChecked())
+            result +=chechBox.getText()+", ";
+        if(chechBox2.isChecked())
+            result +=chechBox2.getText()+", ";
+        if(chechBox3.isChecked())
+            result +=chechBox3.getText()+", ";
+        if(chechBox4.isChecked())
+            result +=chechBox4.getText()+", ";
+        if(chechBox5.isChecked())
+            result +=chechBox5.getText()+", ";
+        if(sothichkhac.length()>0)
+            result += sothichkhac;
         Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
     }
 
